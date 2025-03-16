@@ -29,11 +29,12 @@ public class VagueEnnemiSpawn: MonoBehaviour{
     }
 
     private IEnumerator SpawnVague(){
-        // vagueIndex++;
-        vagueIndex = 1;
+        vagueIndex++;
+        // vagueIndex = 1;
         sound.Play();
-        int valeurAlea = Random.Range(0, listeSpawnEnnemi.Length-1);
+        
         for(int i = 0; i < vagueIndex; i++){
+            int valeurAlea = Random.Range(0, listeSpawnEnnemi.Length-1);
             SpawnEnnemi(valeurAlea);
             yield return new WaitForSeconds(IntervalleEnnemi);
         }

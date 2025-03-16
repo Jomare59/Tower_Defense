@@ -10,6 +10,7 @@ public class EnnemiV2 : MonoBehaviour{
     [SerializeField] private int life = 100;
     [SerializeField] private float vitesse = 1f;
     [SerializeField] private int valueMoney = 50;
+    public AudioSource audioDead;
 
     void Start(){
         RecupererJoueurPosition();
@@ -44,6 +45,7 @@ public class EnnemiV2 : MonoBehaviour{
 
     private void Mort(){
         dead = true;
+        audioDead.Play();
         EffetMort();
         animator.SetBool("Dead", true);
         Destroy(gameObject, 2f);    

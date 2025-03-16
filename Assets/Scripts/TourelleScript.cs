@@ -9,10 +9,14 @@ public class TourelleScript : MonoBehaviour{
     public float cadenceTire = 1f;
     private float couldownTire = 0f;
     public GameObject munitionPrefab;
+    public GameObject effetDestruction;
     public Transform pointDeTir;
+    public AudioSource audioTire;
+    public AudioSource audioDestruction;
 
     private void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        Invoke("DestructionTuret", 10f);
     }
 
     private void UpdateTarget(){
@@ -52,11 +56,19 @@ public class TourelleScript : MonoBehaviour{
     }
 
     private void Tirer(){
+        audioTire.Play();
         GameObject munitionEntite = Instantiate(munitionPrefab, pointDeTir.position, pointDeTir.rotation);
         Munition munition = munitionEntite.GetComponent<Munition>();
         if(munition != null){
             munition.SetTarget(target);
         }
+    }
+
+    private void DestructionTuret(){
+        audioDestruction.Play();
+        GameObject effetDestruct = Instantiate(effetDestruction, this.transform.position, this.transform.rotation);
+        Destroy(effetDestruct, 0.5f);
+        Destroy(this.gameObject);
     }
 
     private void OnDrawGizmosSelected() {
